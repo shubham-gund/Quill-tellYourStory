@@ -22,11 +22,8 @@ export const Appbar = ({ name }: { name: string }) => {
           query: searchQuery,
         },
       });
-      // Handle the response data as needed, e.g., update state with the search results
-      const blogs = response.data.blogs;
     } catch (error) {
       console.error("Error during search:", error);
-      // Handle the error, e.g., show an error message to the user
     }
   }
 
