@@ -1,8 +1,8 @@
 import { Appbar } from "./Appbar"
-import { Blog } from "../hooks"
+import { BlogStructure } from "../hooks"
 import { Avatar } from "./BlogCard"
 
-export const BlogPost =({blog}:{blog:Blog})=>{
+export const BlogPost =({blog}:{blog:BlogStructure})=>{
   return <div>
     <Appbar name={localStorage.getItem("name") || "Anonymous"}/>
 
@@ -25,11 +25,11 @@ export const BlogPost =({blog}:{blog:Blog})=>{
             </div>
             <div className="flex pt-4">
               <div className="pr-4 flex flex-col justify-center">
-              <Avatar size="big" name={blog.author.name || "Anonymous"}/> 
+              <Avatar size="big" name={blog.author?.name || "Anonymous"}/> 
               </div>
               <div>
                 <div className="text-xl font-bold">
-                  {blog.author.name || "Anonymous"} 
+                  {blog.author?.name || "Anonymous"} 
                 </div>
                 <div className="pt-2 text-slate-500">
                   Catch phrase about the iser

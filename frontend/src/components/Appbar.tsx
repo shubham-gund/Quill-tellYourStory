@@ -14,7 +14,7 @@ export const Appbar = ({ name }: { name: string }) => {
 
   async function handleSearch() {
     try {
-      const response = await axios.get(`${BACKEND_URL}/api/v1/blog/search`, {
+        await axios.get(`${BACKEND_URL}/api/v1/blog/search`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

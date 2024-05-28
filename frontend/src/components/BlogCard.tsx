@@ -40,9 +40,6 @@ export const BlogCard = ({
         <div className="text-sm text-slate-400 pt-4">
           {`${Math.ceil(content.length / 100)} min read`}
         </div>
-        <div bg-slate-300 h-1 w-full>
-
-        </div>
       </div>
     </Link>)
 }

@@ -4,11 +4,20 @@ import axios from "axios";
 import { BACKEND_URL } from "../config";
 import { useRecoilValue } from 'recoil';
 import { searchQueryState } from '../atoms';
-import { BlogCardProps } from '../components/BlogCard';
+
+export interface BlogStructure {
+  "content": string;
+  "title": string;
+  "id": string
+  "author": {
+      "name": string
+  }
+  "createdOn":string
+}
 
 export const useBlog = ({ id }: { id: string }) => {
   const [loading, setLoading] = useState(true);
-  const [blog, setBlog] = useState<BlogCardProps>();
+  const [blog, setBlog] = useState<BlogStructure>();
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -46,7 +55,7 @@ export const useBlog = ({ id }: { id: string }) => {
 export const useBlogs = () => {
   const searchQuery = useRecoilValue(searchQueryState);
   const [loading, setLoading] = useState(true);
-  const [blogs, setBlogs] = useState<BlogCardProps[]>([]);
+  const [blogs, setBlogs] = useState<BlogStructure[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
