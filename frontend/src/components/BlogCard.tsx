@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-interface BlogCardProps {
+export interface BlogCardProps {
   id:string,
   authorName:string,
   title:string,

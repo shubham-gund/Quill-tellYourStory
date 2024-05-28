@@ -16,7 +16,7 @@ export const Blogs = () => {
           {blogs.map((blog) => (
             <BlogCard
               id={blog.id}// Add key prop here
-              authorName={blog.author.name || "Anonymous"}
+              authorName={blog.authorName || "Anonymous"}
               title={blog.title}
               content={blog.content}
               createdOn={blog.createdOn} 

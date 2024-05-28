@@ -1,23 +1,14 @@
-
+// useBlogs.ts
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
+import { useRecoilValue } from 'recoil';
+import { searchQueryState } from '../atoms';
+import { BlogCardProps } from '../components/BlogCard';
 
-// types.ts
-export interface Blog {
-  id: string;
-  title: string;
-  content: string;
-  createdOn: string;
-  author: {
-    name: string;
-  };
-}
-
-
-export const useBlog = ({id}:{id:string})=>{
+export const useBlog = ({ id }: { id: string }) => {
   const [loading, setLoading] = useState(true);
-  const [blog, setBlog] = useState<Blog>();
+  const [blog, setBlog] = useState<BlogCardProps>();
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -47,13 +38,15 @@ export const useBlog = ({id}:{id:string})=>{
 
   return {
     loading,
-    blog
-  }
+    blog,
+    error
+  };
 }
 
 export const useBlogs = () => {
+  const searchQuery = useRecoilValue(searchQueryState);
   const [loading, setLoading] = useState(true);
-  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [blogs, setBlogs] = useState<BlogCardProps[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -65,8 +58,10 @@ export const useBlogs = () => {
       return;
     }
 
+    const endpoint = searchQuery ? `/api/v1/blog/search?query=${searchQuery}` : '/api/v1/blog/bulk';
+
     axios
-      .get(`${BACKEND_URL}/api/v1/blog/bulk`, {
+      .get(`${BACKEND_URL}${endpoint}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -79,7 +74,7 @@ export const useBlogs = () => {
         setError(err.response ? err.response.data.message : err.message);
         setLoading(false);
       });
-  }, []);
+  }, [searchQuery]);
 
   return {
     loading,

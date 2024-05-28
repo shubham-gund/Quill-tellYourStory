@@ -1,7 +1,7 @@
 import { BlogPost } from "../components/BlogPost";
 import { useBlog } from "../hooks";
 import { useParams } from "react-router-dom";
-import { Blog as BlogType } from "../hooks";
+import { BlogCardProps as BlogType } from "../components/BlogCard";
 
 export const Blog = ()=>{
   const { id } = useParams();
