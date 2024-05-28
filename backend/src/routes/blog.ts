@@ -119,6 +119,17 @@ blogRouter.get("/search",async(c)=>{
           { title: { contains: query }},
           { content: { contains: query } },
         ],
+      },
+      select: {
+        content: true,
+        title: true,
+        id: true,
+        createdOn: true,
+        author: {
+          select: {
+            name: true
+          }
+        }
       }
     });
     return c.json({
