@@ -17,8 +17,8 @@ function App() {
             <Route path='/signin' element={<Signin/>} />
             <Route path='/blog/:id' element={<Blog/>} />
             <Route path='/blogs' element={<Blogs/>} />
-          </Routes>
-        </Router>
+        </Routes>
+      </Router>
      </RecoilRoot>
     </>
   )
