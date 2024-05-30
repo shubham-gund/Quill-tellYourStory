@@ -1,4 +1,3 @@
-import React from 'react';
 import { BlogPost } from '../components/BlogPost';
 import { useBlog } from '../hooks';
 import { useParams } from 'react-router-dom';
