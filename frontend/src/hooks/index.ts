@@ -91,3 +91,43 @@ export const useBlogs = () => {
     error,
   };
 };
+
+
+export const usePersonalBlogs = () => {
+  const searchQuery = useRecoilValue(searchQueryState);
+  const [personalBlogloading, setPersonalBlogLoading] = useState(true);
+  const [personalBlogs, setPersonalBlogs] = useState<BlogStructure[]>([]);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      setError("No authorization token found");
+      setPersonalBlogLoading(false);
+      return;
+    }
+    const endpoint = searchQuery ? `/api/v1/blog/search?query=${searchQuery}` : '/api/v1/blog/myblogs';
+
+    axios
+      .get(`${BACKEND_URL}${endpoint}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(res => {
+        setPersonalBlogs(res.data.blogs);
+        setPersonalBlogLoading(false);
+      })
+      .catch((err) => {
+        setError(err.response ? err.response.data.message : err.message);
+        setPersonalBlogLoading(false);
+      });
+  }, [searchQuery]);
+
+  return {
+    personalBlogloading,
+    personalBlogs,
+    error,
+  };
+};

@@ -151,6 +151,9 @@ blogRouter.get("/bulk", async (c) => {
 
   try {
     const blogs = await prisma.post.findMany({
+      orderBy: {
+        createdOn: 'desc', // Order by createdOn in descending order
+      },
       select: {
         content: true,
         title: true,
@@ -173,6 +176,51 @@ blogRouter.get("/bulk", async (c) => {
     return c.json({ msg: "Something went wrong" });
   }
 });
+
+
+//get blogs posted by the user
+
+// Get personal blogs
+blogRouter.get("/myblogs", async (c) => {
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env.DATABASE_URL,
+  }).$extends(withAccelerate());
+
+  const userId = c.get("userId");
+
+
+  try {
+    const myBlogs = await prisma.post.findMany({
+      where: {
+        authorId: userId
+      },
+      orderBy: {
+        createdOn: 'desc', // Order by createdOn in descending order
+      },
+      select: {
+        content: true,
+        title: true,
+        id: true,
+        createdOn: true,
+        author: {
+          select: {
+            name: true
+          }
+        }
+      }
+    });
+
+    return c.json({ blogs: myBlogs });
+  } catch (error) {
+    console.error('Error in GET /myblogs:', error); // Log the error details
+    c.status(500);
+    return c.json({ msg: "Something went wrong" });
+  }
+});
+
+
+
+
 
 // Get a particular blog
 blogRouter.get("/:id", async (c) => {

@@ -47,7 +47,7 @@ export const Appbar = ({ name }: { name: string }) => {
         handleSearch={handleSearch}
       />
 
-      <div className="">
+      <div className="flex items-center">
         <Avatar size={"big"} name={name} />
       </div>
     </div>
