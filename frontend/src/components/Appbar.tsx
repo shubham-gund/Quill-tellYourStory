@@ -7,12 +7,14 @@ import axios from 'axios';
 import { searchQueryState } from "../atoms";
 import { BACKEND_URL } from '../config';
 import { useSetRecoilState } from 'recoil';
+import { useNavigate } from "react-router-dom";
 interface AppbarProps {
   name: string;
   onToggleBlogs: (showAll: boolean) => void; // New prop to handle the toggle
 }
 
 export const Appbar = ({ name, onToggleBlogs }: AppbarProps) => {
+  const navigate = useNavigate();
   const [allBlogs, setAllBlogs] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const setGlobalSearchQuery = useSetRecoilState(searchQueryState);
@@ -57,13 +59,17 @@ export const Appbar = ({ name, onToggleBlogs }: AppbarProps) => {
       <div className="flex items-center space-x-4">
         <button
           className={`px-4 py-1 rounded-full ${allBlogs ? "bg-blue-600" : "bg-gray-700"}`}
-          onClick={() => handleToggle(true)}
+          onClick={() =>{ handleToggle(false)
+            navigate("/blogs")
+        }}
         >
           Feed
         </button>
         <button
           className={`px-4 py-1 rounded-full ${!allBlogs ? "bg-blue-600" : "bg-gray-700"}`}
-          onClick={() => handleToggle(false)}
+          onClick={() =>{ handleToggle(false)
+              navigate("/blogs")
+          }}
         >
           Your Blogs
         </button>
