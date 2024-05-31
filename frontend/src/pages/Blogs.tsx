@@ -1,3 +1,4 @@
+// Blogs.tsx
 import { Appbar } from "../components/Appbar";
 import { BlogCard } from "../components/BlogCard";
 import { useBlogs } from "../hooks";
@@ -19,7 +20,7 @@ export const Blogs = () => {
     return (
       <div>
         <Appbar name={localStorage.getItem("name") || "Anonymous"} />
-        <div className="pt-4 flex justify-center">
+        <div className="pt-24 flex justify-center">
           <div>
             <BlogSkeleton />
             <BlogSkeleton />
@@ -34,7 +35,7 @@ export const Blogs = () => {
   return (
     <div>
       <Appbar name={localStorage.getItem("name") || "Anonymous"} />
-      <div className="pt-4 flex justify-center">
+      <div className="pt-24 flex justify-center">
         <div>
           {blogs.map((blog) => (
             <BlogCard
@@ -67,7 +68,7 @@ export const Blogs = () => {
           className="flex items-center justify-center rounded-md mx-auto mt-15 p-5"
         >
           <Publish
-            noteData={openAddEditModel.data}
+            BlogData={openAddEditModel.data}
             onClose={() => {  
               setOpenAddEditModel({ isShown: false, type: "add", data: null });
             }}

@@ -1,7 +1,7 @@
 // Appbar.tsx
-import { Avatar } from "./BlogCard"
-import { Link } from "react-router-dom"
-import SearchBar from "./SearchBar"
+import { Avatar } from "./BlogCard";
+import { Link } from "react-router-dom";
+import SearchBar from "./SearchBar";
 import { useSetRecoilState } from 'recoil';
 import { searchQueryState } from "../atoms";
 import { useEffect, useState } from "react";
@@ -14,7 +14,7 @@ export const Appbar = ({ name }: { name: string }) => {
 
   async function handleSearch() {
     try {
-        await axios.get(`${BACKEND_URL}/api/v1/blog/search`, {
+      await axios.get(`${BACKEND_URL}/api/v1/blog/search`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -32,7 +32,7 @@ export const Appbar = ({ name }: { name: string }) => {
   }, [searchQuery, setGlobalSearchQuery]);
 
   return (
-    <div className="border-b flex justify-between px-10 py-4">
+    <div className="border-b flex justify-between px-10 py-4 fixed top-0 left-0 w-full bg-white z-50">
       <Link to={"/blogs"}>
         <div className="font-bold text-xl cursor-pointer">
           Blogger
@@ -51,5 +51,5 @@ export const Appbar = ({ name }: { name: string }) => {
         <Avatar size={"big"} name={name} />
       </div>
     </div>
-  )
-}
+  );
+};

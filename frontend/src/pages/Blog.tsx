@@ -11,7 +11,7 @@ export const Blog = () => {
     return (
       <div>
         <Appbar name={localStorage.getItem('name') || 'Anonymous'} />
-        <div className="w-full flex justify-center pt-6">
+        <div className="w-full flex justify-center pt-24">
           <div
             role="status"
             className="flex flex-col md:flex-row m-4 items-start w-full max-w-screen-xl p-4 rounded shadow animate-pulse md:p-6 dark:border-gray-700"
@@ -29,7 +29,7 @@ export const Blog = () => {
               <div className="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-2"></div>
             </div>
 
-            <div className="flex pt-10 items-center mt-6 md:mt-0 md:ml-6 w-full md:w-1/3">
+            <div className="flex pt-16 items-center mt-6 md:mt-0 md:ml-6 w-full md:w-1/3">
               <svg
                 className="w-8 h-8 mb-4 mr-4 text-gray-200 dark:text-gray-700"
                 aria-hidden="true"
@@ -55,5 +55,7 @@ export const Blog = () => {
     return <div>No blog found</div>;
   }
 
-  return <BlogPost blog={blog} />;
+  return <div className='pt-24'>
+    <BlogPost blog={blog} />
+  </div>;
 };

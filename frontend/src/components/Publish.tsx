@@ -4,14 +4,14 @@ import axios from "axios";
 import { BACKEND_URL } from "../config";
 import { useNavigate } from "react-router-dom"; 
 
-type noteDataProps = {
+type BlogDataProps = {
   title: string,
   content: string
 } | null;
 
-export const Publish = ({ noteData, onClose }: { noteData: noteDataProps, onClose: () => void }) => {
-  const [title, setTitle] = useState(noteData?.title || "");
-  const [content, setContent] = useState(noteData?.content || "");
+export const Publish = ({ BlogData, onClose }: { BlogData: BlogDataProps, onClose: () => void }) => {
+  const [title, setTitle] = useState(BlogData?.title || "");
+  const [content, setContent] = useState(BlogData?.content || "");
   const [error, setError] = useState<string>("");
   const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ export const Publish = ({ noteData, onClose }: { noteData: noteDataProps, onClos
         }
       );
       navigate(`/blog/${res.data.id}`);
-      if (res.data && res.data.note) {
+      if (res.data && res.data.Blog) {
         onClose();
       }
     } catch (error: any) {
@@ -40,7 +40,7 @@ export const Publish = ({ noteData, onClose }: { noteData: noteDataProps, onClos
     }
   };
 
-  const handleAddNote = () => {
+  const handleAddBlog = () => {
     if (!title) {
       setError("Please Enter Title");
       return;
@@ -82,10 +82,10 @@ export const Publish = ({ noteData, onClose }: { noteData: noteDataProps, onClos
       {error && <p className="text-red-500 text-xs pt-4 mx-5">{error}</p>}
 
       <div className="flex items-center justify-center">
-        {/* <button className=" font-medium m-7 pt-3 w-80" onClick={handleAddNote}>
+        {/* <button className=" font-medium m-7 pt-3 w-80" onClick={handleAddBlog}>
           Publish
         </button> */}
-         <button type="button" className="text-white w-2/5 bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 my-8 mb-2" onClick={handleAddNote}>Publish</button>
+         <button type="button" className="text-white w-2/5 bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 my-8 mb-2" onClick={handleAddBlog}>Publish</button>
       </div>
     </div>
   );
