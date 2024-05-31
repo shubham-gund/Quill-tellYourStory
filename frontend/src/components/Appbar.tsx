@@ -10,7 +10,7 @@ import { useSetRecoilState } from 'recoil';
 import { useNavigate } from "react-router-dom";
 interface AppbarProps {
   name: string;
-  onToggleBlogs: (showAll: boolean) => void; // New prop to handle the toggle
+  onToggleBlogs?: (showAll: boolean) => void; // New prop to handle the toggle
 }
 
 export const Appbar = ({ name, onToggleBlogs }: AppbarProps) => {
@@ -40,8 +40,9 @@ export const Appbar = ({ name, onToggleBlogs }: AppbarProps) => {
 
   const handleToggle = (showAll: boolean) => {
     setAllBlogs(showAll);
-    onToggleBlogs(showAll);
+    onToggleBlogs && onToggleBlogs(showAll); // Check if onToggleBlogs is defined
   };
+  
 
   return (
     <div className="flex justify-between items-center py-2 px-4 bg-slate-950 border-b-2 border-slate-800 text-white fixed w-full top-0">
