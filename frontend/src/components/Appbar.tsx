@@ -60,7 +60,7 @@ export const Appbar = ({ name, onToggleBlogs }: AppbarProps) => {
       <div className="flex items-center space-x-4">
         <button
           className={`px-4 py-1 rounded-full ${allBlogs ? "bg-blue-600" : "bg-gray-700"}`}
-          onClick={() =>{ handleToggle(false)
+          onClick={() =>{ handleToggle(true)
             navigate("/blogs")
         }}
         >
