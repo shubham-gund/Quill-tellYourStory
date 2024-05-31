@@ -54,7 +54,7 @@ export const Publish = ({ BlogData, onClose }: { BlogData: BlogDataProps, onClos
   };
 
   return (
-    <div className="relative w-11/12 sm:w-5/12 mx-5 sm:mx-20 mt-20 sm:mt-20 bg-slate-500 p-5 rounded-lg">
+    <div className="relative w-11/12 sm:w-5/12 mx-5 text-black sm:mx-20 mt-20 sm:mt-20 bg-slate-500 p-5 rounded-lg">
       <button className="absolute top-2 right-2 w-10 h-10 rounded-full flex items-center justify-center hover:bg-slate-400" onClick={onClose}>
         <MdClose className="text-xl" />
       </button>

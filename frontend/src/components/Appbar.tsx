@@ -1,14 +1,19 @@
 // Appbar.tsx
-import { Avatar } from "./BlogCard";
-import { Link } from "react-router-dom";
-import SearchBar from "./SearchBar";
-import { useSetRecoilState } from 'recoil';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { Avatar } from './BlogCard';
+import SearchBar from './SearchBar';
+import axios from 'axios';
 import { searchQueryState } from "../atoms";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { BACKEND_URL } from "../config";
+import { BACKEND_URL } from '../config';
+import { useSetRecoilState } from 'recoil';
+interface AppbarProps {
+  name: string;
+  onToggleBlogs: (showAll: boolean) => void; // New prop to handle the toggle
+}
 
-export const Appbar = ({ name }: { name: string }) => {
+export const Appbar = ({ name, onToggleBlogs }: AppbarProps) => {
+  const [allBlogs, setAllBlogs] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const setGlobalSearchQuery = useSetRecoilState(searchQueryState);
 
@@ -31,14 +36,17 @@ export const Appbar = ({ name }: { name: string }) => {
     setGlobalSearchQuery(searchQuery);
   }, [searchQuery, setGlobalSearchQuery]);
 
-  return (
-    <div className="border-b flex justify-between px-10 py-4 fixed top-0 left-0 w-full bg-white z-50">
-      <Link to={"/blogs"}>
-        <div className="font-bold text-xl cursor-pointer">
-          Blogger
-        </div>
-      </Link>
+  const handleToggle = (showAll: boolean) => {
+    setAllBlogs(showAll);
+    onToggleBlogs(showAll);
+  };
 
+  return (
+    <div className="flex justify-between items-center py-2 px-4 bg-slate-950 border-b-2 border-slate-800 text-white fixed w-full top-0">
+      <div className='pr-20'>
+        <Link to={"/blogs"} ><h1 className="text-xl font-bold cursor-pointer">Medium</h1></Link>
+        <span className="text-sm">Welcome, {name}</span>
+      </div>
       <SearchBar
         value={searchQuery}
         onChange={({ target }) => {
@@ -46,8 +54,20 @@ export const Appbar = ({ name }: { name: string }) => {
         }}
         handleSearch={handleSearch}
       />
+      <div className="flex items-center space-x-4">
+        <button
+          className={`px-4 py-1 rounded-full ${allBlogs ? "bg-blue-600" : "bg-gray-700"}`}
+          onClick={() => handleToggle(true)}
+        >
+          Feed
+        </button>
+        <button
+          className={`px-4 py-1 rounded-full ${!allBlogs ? "bg-blue-600" : "bg-gray-700"}`}
+          onClick={() => handleToggle(false)}
+        >
+          Your Blogs
+        </button>
 
-      <div className="flex items-center">
         <Avatar size={"big"} name={name} />
       </div>
     </div>

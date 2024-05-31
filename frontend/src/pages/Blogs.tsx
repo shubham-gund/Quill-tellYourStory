@@ -1,7 +1,7 @@
 // Blogs.tsx
 import { Appbar } from "../components/Appbar";
 import { BlogCard } from "../components/BlogCard";
-import { useBlogs,usePersonalBlogs } from "../hooks";
+import { useBlogs, usePersonalBlogs } from "../hooks";
 import { BlogSkeleton } from "../components/BlogSkeleton";
 import Modal from "react-modal";
 import { useState } from "react";
@@ -16,12 +16,16 @@ export const Blogs = () => {
     type: "add",
     data: null,
   });
-  const [allBlogs,setAllBlogs] = useState(true);
+  const [allBlogs, setAllBlogs] = useState(true);
+
+  const handleToggleBlogs = (showAll: boolean) => {
+    setAllBlogs(showAll);
+  };
 
   if (loading || personalBlogloading) {
     return (
       <div>
-        <Appbar name={localStorage.getItem("name") || "Anonymous"} />
+        <Appbar name={localStorage.getItem("name") || "Anonymous"} onToggleBlogs={handleToggleBlogs} />
         <div className="pt-24 flex justify-center">
           <div>
             <BlogSkeleton />
@@ -36,90 +40,51 @@ export const Blogs = () => {
 
   return (
     <div>
-      <Appbar name={localStorage.getItem("name") || "Anonymous"} />
+      <Appbar name={localStorage.getItem("name") || "Anonymous"} onToggleBlogs={handleToggleBlogs} />
 
-      <div className="flex justify-center pt-24 ">
-          <button type="button" className="w-28 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 " 
-          onClick={()=>{
-            setAllBlogs(true);
-          }}
-          
-          >Feed</button>
-
-          <button type="button" className="w-28 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 "
-          onClick={()=>{
-            setAllBlogs(false);
-          }}
-          >Your Blogs</button>
+      <div className="pt-20 flex justify-center">
+        {allBlogs ? (
+          <div>
+            {blogs.map((blog) => (
+              <BlogCard
+                key={blog.id}
+                id={blog.id}
+                authorName={blog.author ? blog.author.name || "Anonymous" : "Anonymous"} // Check if author exists
+                title={blog.title}
+                content={blog.content}
+                createdOn={blog.createdOn}
+              />
+            ))}
+          </div>
+        ) : (
+          <div>
+            {personalBlogs.map((blog) => (
+              <BlogCard
+                key={blog.id}
+                id={blog.id}
+                authorName={blog.author ? blog.author.name || "Anonymous" : "Anonymous"} // Check if author exists
+                title={blog.title}
+                content={blog.content}
+                createdOn={blog.createdOn}
+              />
+            ))}
+          </div>
+        )}
       </div>
-
       
-
- 
-      {allBlogs ? <div className="pt-10 flex justify-center">
-                    <div>
-                        {blogs.map((blog) => (
-                          <BlogCard
-                            key={blog.id}
-                            id={blog.id}
-                            authorName={blog.author ? blog.author.name || "Anonymous" : "Anonymous"} // Check if author exists
-                            title={blog.title}
-                            content={blog.content}
-                            createdOn={blog.createdOn}
-                          />
-                        ))}
-                      </div>
-                      <button className='w-16 h-16 flex items-center justify-center rounded-full bg-black text-white hover:bg-blue-600 hover:text-white fixed right-10  bottom-10' onClick={()=>{
-                              setOpenAddEditModel({isShown:true , type:"add",data:null});
-                          }}>
-                              <MdAdd className='text-[32px]'> </MdAdd>
-                      </button>
-                      <Modal
-                        isOpen={openAddEditModel.isShown}
-                        onRequestClose={() =>
-                          setOpenAddEditModel({ isShown: false, type: "add", data: null })
-                        }
-                        ariaHideApp={false} // Opt-out
-                        style={{
-                          overlay: {
-                            backgroundColor: "rgba(0,0,0,0.8)",
-                          },
-                        }}
-                        contentLabel="Add/Edit Blog Modal"
-                        className="flex items-center justify-center rounded-md mx-auto mt-15 p-5"
-                      >
-                        <Publish
-                          BlogData={openAddEditModel.data}
-                          onClose={() => {  
-                            setOpenAddEditModel({ isShown: false, type: "add", data: null });
-                          }}
-                        ></Publish>
-                      </Modal>
-                    </div>
-    :  <div className="pt-10 flex justify-center">
-    <div>
-        {personalBlogs.map((blog) => (
-          <BlogCard
-            key={blog.id}
-            id={blog.id}
-            authorName={blog.author ? blog.author.name || "Anonymous" : "Anonymous"} // Check if author exists
-            title={blog.title}
-            content={blog.content}
-            createdOn={blog.createdOn}
-          />
-        ))}
-      </div>
-      <button className='w-16 h-16 flex items-center justify-center rounded-full bg-black text-white hover:bg-blue-600 hover:text-white fixed right-10  bottom-10' onClick={()=>{
-              setOpenAddEditModel({isShown:true , type:"add",data:null});
-          }}>
-              <MdAdd className='text-[32px]'> </MdAdd>
+      <button
+        className='w-16 h-16 flex items-center justify-center rounded-full bg-blue-500 text-white hover:bg-blue-600 hover:text-white fixed right-10 bottom-10'
+        onClick={() => {
+          setOpenAddEditModel({ isShown: true, type: "add", data: null });
+        }}
+      >
+        <MdAdd className='text-[32px]' />
       </button>
+      
       <Modal
         isOpen={openAddEditModel.isShown}
-        onRequestClose={() =>
-          setOpenAddEditModel({ isShown: false, type: "add", data: null })
-        }
-        ariaHideApp={false} // Opt-out
+        onRequestClose={() => setOpenAddEditModel({ isShown: false, type: "add", data: null })}
+        ariaHideApp={false}
         style={{
           overlay: {
             backgroundColor: "rgba(0,0,0,0.8)",
@@ -130,13 +95,9 @@ export const Blogs = () => {
       >
         <Publish
           BlogData={openAddEditModel.data}
-          onClose={() => {  
-            setOpenAddEditModel({ isShown: false, type: "add", data: null });
-          }}
-        ></Publish>
+          onClose={() => setOpenAddEditModel({ isShown: false, type: "add", data: null })}
+        />
       </Modal>
-    </div>}
-
-    </div>  
+    </div>
   );
 };

@@ -1,0 +1,29 @@
+body {
+  background-color: rgb(3, 7, 18);
+  color: whitesmoke;
+  scrollbar-color: #f1f1f1 #545454; /* Adjust this value based on the height of your appbar */
+}
+
+/* Define scrollbar styles */
+/* Width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #000000; /* Light grey */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; /* Grey */
+  border-radius: 6px; /* Roundness of the handle */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Dark grey */
+}
+
+

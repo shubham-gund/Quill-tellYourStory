@@ -24,7 +24,7 @@ export const Auth = ({type}:{type:"signup" | "signin"})=>{
       alert("Request failed")
     }
   }
-  return <div className="h-screen flex justify-center items-center">
+  return <div className="h-screen flex justify-center items-center bg-slate-200 text-black">
     <div>
       <div className="text-4xl text-center font-extrabold pb-2 px-10">
         {type === "signin" ?  "Login to Account " : "Create an Account"}
@@ -70,8 +70,10 @@ interface LabelledInputType {
 function LabelledInput({ label, placeholder, onChange, type }:LabelledInputType){
   return <div>
               <div className="mt-4">
-            <label className="block mb-2 text-base font-semibold text-gray-900 dark:text-white">{label}</label>
-            <input onChange={onChange} type={ type || "text"} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder={placeholder} required />
+            <label className="block mb-2 text-base font-bold text-gray-900 dark:text-white">{label}</label>
+            <div className="border-slate-400 border-b-2">
+             <input onChange={onChange} type={ type || "text"} className="bg-slate-200 text-gray-900 text-sm font-bold rounded-lg block w-full p-2.5" placeholder={placeholder} required />
+            </div>
         </div>
   </div>
 }

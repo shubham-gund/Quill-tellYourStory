@@ -20,7 +20,7 @@ export const BlogCard = ({
           <div className="">
             <Avatar name={authorName}/>
           </div>
-          <div className="font-light px-2 text-sm flex justify-center flex-col">
+          <div className=" px-2 text-sm flex justify-center flex-col">
             {authorName}
           </div>
           <div className="flex justify-center flex-col px-1">
@@ -46,8 +46,8 @@ export const BlogCard = ({
 
 export function Avatar({name , size="small"}:{name:string , size?:"small" | "big"} ){
   return (
-    <div className={`relative inline-flex items-center justify-center ${size === "small" ? "w-6 h-6" : "w-8 h-8" } overflow-hidden bg-gray-300 rounded-full dark:bg-gray-600`}>
-      <span className={`${size === "small" ?  "text-sm" : "text-lg" } font-medium text-gray-700 dark:text-gray-300`}>{name[0].toUpperCase()}</span>
+    <div className={`inline-flex items-center justify-center ${size === "small" ? "w-6 h-6" : "w-8 h-8" } overflow-hidden bg-gray-700 rounded-full dark:bg-gray-600`}>
+      <span className={`${size === "small" ?  "text-sm" : "text-lg" } font-medium dark:text-gray-300`}>{name[0].toUpperCase()}</span>
 
   </div>
   )
