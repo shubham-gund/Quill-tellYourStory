@@ -9,8 +9,8 @@ import { useSetRecoilState } from 'recoil';
 import { useNavigate } from "react-router-dom";
 
 interface AppbarProps {
-  name: string;
-  onToggleBlogs?: (showAll: boolean) => void; // New prop to handle the toggle
+  name : string;
+  onToggleBlogs ?: (showAll: boolean) => void; // New prop to handle the toggle
 }
 
 export const Appbar = ({ name, onToggleBlogs }: AppbarProps) => {
