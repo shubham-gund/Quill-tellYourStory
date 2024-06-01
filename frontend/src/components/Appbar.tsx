@@ -15,7 +15,6 @@ interface AppbarProps {
 
 export const Appbar = ({ name, onToggleBlogs }: AppbarProps) => {
   const navigate = useNavigate();
-  const [allBlogs, setAllBlogs] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const setGlobalSearchQuery = useSetRecoilState(searchQueryState);
@@ -40,7 +39,6 @@ export const Appbar = ({ name, onToggleBlogs }: AppbarProps) => {
   }, [searchQuery, setGlobalSearchQuery]);
 
   const handleToggle = (showAll: boolean) => {
-    setAllBlogs(showAll);
     onToggleBlogs && onToggleBlogs(showAll); // Check if onToggleBlogs is defined
   };
 
