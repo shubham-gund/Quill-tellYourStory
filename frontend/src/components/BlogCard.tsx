@@ -44,8 +44,8 @@ export const BlogCard = ({
   }, [id]);
 
   return (
-    <div className="flex border-b border-slate-300 p-4 w-screen max-w-screen-md cursor-pointer">
-      <div className="flex-grow">
+    <div className="flex flex-col border-b border-slate-300 p-4 w-screen max-w-screen-md">
+      <div className="flex-grow cursor-pointer">
         <Link to={`/blog/${id}`}>
           <div className="flex">
             <div className="">
@@ -61,27 +61,31 @@ export const BlogCard = ({
               {createdOn}
             </div>
           </div>
-          <div className="text-xl font-bold pt-2">{title}</div>
-          <div className="font-medium text-slate-500">
+          <div className="text-xl font-bold pt-3">{title}</div>
+          <div className="font-medium text-slate-500 pt-1">
             {content.length > 150 ? content.slice(0, 150) + "..." : content}
           </div>
-          <div className="text-sm text-slate-400 pt-4">
-            {`${Math.ceil(content.length / 1000)} min read`}
-          </div>
+
         </Link>
       </div>
-      {isPersonal && (
-        <div className="flex justify-center items-center pl-4">
-          <button className="flex justify-center items-center h-10 w-10 p-2 rounded-full hover:bg-green-100" onClick={handleEdit}>
-            <MdCreate className="text-green-600" size={20} />
-          </button>
-          <button className="flex justify-center items-center h-10 w-10 p-2 rounded-full hover:bg-red-100" onClick={() => { 
-            handleDelete();  
-          }}>
-            <MdDelete className="text-red-500" size={20} />
-          </button>
+      <div className="flex items-center justify-between pt-4">
+        <div className="flex text-sm text-slate-400">
+              {`${Math.ceil(content.length / 1000)} min read`}
         </div>
+        {isPersonal && (
+          <div className="flex">
+              <button className="flex justify-center items-center h-10 w-10 mr-2 p-2 rounded-full hover:bg-green-100" onClick={handleEdit}>
+                <MdCreate className="text-green-600" size={24} />
+              </button>
+              <button className="flex justify-center items-center h-10 w-10 p-2 rounded-full hover:bg-red-100" onClick={() => { 
+                handleDelete();  
+              }}>
+                <MdDelete className="text-red-500" size={24} />
+              </button>
+          </div>
+        
       )}
+      </div>
     </div>
   );
 }
