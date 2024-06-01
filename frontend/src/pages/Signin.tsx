@@ -2,15 +2,14 @@ import { Quote } from "../components/Quote"
 import { Auth } from "../components/Auth"
 
 export const Signin = ()=>{
-  return <div>
-    <div className="grid grid-cols-1 lg:grid-cols-2">
-      <div className="hidden lg:block">
+  return (
+    <div className="min-h-screen flex bg-slate-200 flex-col sm:flex-row">
+      <div className="sm:w-1/2 hidden sm:block">
         <Quote/>
       </div>
-      <div>
-        <Auth type= "signin" />
+      <div className="w-full sm:w-1/2 flex items-center justify-center p-4">
+        <Auth type="signin" />
       </div>
     </div>
-
-  </div>
+  );
 }

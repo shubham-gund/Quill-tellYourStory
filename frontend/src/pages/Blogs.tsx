@@ -74,7 +74,7 @@ export const Blogs = () => {
       </div>
       
       <button
-        className='w-16 h-16 flex items-center justify-center rounded-full bg-blue-500 text-white hover:bg-blue-600 hover:text-white fixed right-10 bottom-10'
+        className='w-16 h-16 flex items-center justify-center rounded-full bg-blue-500 text-white hover:bg-blue-600 hover:text-white fixed right-6 bottom-6 sm:fixed sm:right-10 sm:bottom-10'
         onClick={() => {
           setOpenAddEditModel({ isShown: true, type: "add", data: null });
         }}

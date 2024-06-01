@@ -29,7 +29,7 @@ export const Blog = () => {
               <div className="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-2"></div>
             </div>
 
-            <div className="flex pt-16 items-center mt-6 md:mt-0 md:ml-6 w-full md:w-1/3">
+            <div className="flex pt-16 items-center mt-6 md:mt-0 sm:pl-24 md:ml-6 w-full md:w-1/3">
               <svg
                 className="w-8 h-8 mb-4 mr-4 text-gray-200 dark:text-gray-700"
                 aria-hidden="true"
@@ -55,7 +55,7 @@ export const Blog = () => {
     return <div>No blog found</div>;
   }
 
-  return <div className='pt-24'>
+  return <div className='pt-20 sm:pt-24'>
     <BlogPost blog={blog} />
   </div>;
 };
