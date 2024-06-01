@@ -1,4 +1,3 @@
-// Blogs.tsx
 import { Appbar } from "../components/Appbar";
 import { BlogCard } from "../components/BlogCard";
 import { useBlogs, usePersonalBlogs } from "../hooks";
@@ -53,6 +52,7 @@ export const Blogs = () => {
                 title={blog.title}
                 content={blog.content}
                 createdOn={blog.createdOn}
+                isPersonal={false} // Indicate this is not a personal blog
               />
             ))}
           </div>
@@ -66,6 +66,7 @@ export const Blogs = () => {
                 title={blog.title}
                 content={blog.content}
                 createdOn={blog.createdOn}
+                isPersonal={true} // Indicate this is a personal blog
               />
             ))}
           </div>

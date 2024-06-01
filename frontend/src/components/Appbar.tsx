@@ -1,4 +1,3 @@
-// Appbar.tsx
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Avatar } from './BlogCard';
@@ -8,6 +7,7 @@ import { searchQueryState } from "../atoms";
 import { BACKEND_URL } from '../config';
 import { useSetRecoilState } from 'recoil';
 import { useNavigate } from "react-router-dom";
+
 interface AppbarProps {
   name: string;
   onToggleBlogs?: (showAll: boolean) => void; // New prop to handle the toggle
@@ -17,6 +17,7 @@ export const Appbar = ({ name, onToggleBlogs }: AppbarProps) => {
   const navigate = useNavigate();
   const [allBlogs, setAllBlogs] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const setGlobalSearchQuery = useSetRecoilState(searchQueryState);
 
   async function handleSearch() {
@@ -42,12 +43,16 @@ export const Appbar = ({ name, onToggleBlogs }: AppbarProps) => {
     setAllBlogs(showAll);
     onToggleBlogs && onToggleBlogs(showAll); // Check if onToggleBlogs is defined
   };
-  
+
+  const handleLogout = () => {
+    localStorage.clear()
+    navigate("/signin"); // Redirect to login page after logout
+  };
 
   return (
     <div className="flex justify-between items-center py-2 px-4 bg-slate-950 border-b-2 border-slate-800 text-white fixed w-full top-0">
-      <div className='pr-20'>
-        <Link to={"/blogs"} ><h1 className="text-xl font-bold cursor-pointer">Medium</h1></Link>
+      <div className=''>
+        <Link to={"/blogs"} ><h1 className="text-xl font-bold cursor-pointer" onClick={() => handleToggle(true)}>TaleTrail</h1></Link>
         <span className="text-sm">Welcome, {name}</span>
       </div>
       <SearchBar
@@ -57,25 +62,23 @@ export const Appbar = ({ name, onToggleBlogs }: AppbarProps) => {
         }}
         handleSearch={handleSearch}
       />
-      <div className="flex items-center space-x-4">
-        <button
-          className={`px-4 py-1 rounded-full ${allBlogs ? "bg-blue-600" : "bg-gray-700"}`}
-          onClick={() =>{ handleToggle(true)
-            navigate("/blogs")
-        }}
-        >
-          Feed
-        </button>
-        <button
-          className={`px-4 py-1 rounded-full ${!allBlogs ? "bg-blue-600" : "bg-gray-700"}`}
-          onClick={() =>{ handleToggle(false)
-              navigate("/blogs")
-          }}
-        >
-          Your Blogs
-        </button>
-
-        <Avatar size={"big"} name={name} />
+      <div className="flex items-center space-x-4 relative">
+        <div className="relative">
+          <div onClick={() => setDropdownOpen(!dropdownOpen)} className="cursor-pointer">
+            <Avatar size={"big"} name={name} />
+          </div>
+          {dropdownOpen && (
+            <div className="absolute right-0 mt-2 w-48 bg-slate-100 font-semibold text-black rounded-md shadow-lg py-2">
+              <Link to="/profile" className="block px-4 py-2 hover:bg-gray-200">Edit Profile</Link>
+              <Link to="/blogs" className="block px-4 py-2 hover:bg-gray-200" onClick={() =>{ 
+                setDropdownOpen(!dropdownOpen);
+                handleToggle(false)
+              }
+              }>Stories</Link>
+              <button onClick={handleLogout} className="block w-full text-left px-4 py-2 hover:bg-red-100">Logout</button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
