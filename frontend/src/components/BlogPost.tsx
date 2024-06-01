@@ -5,7 +5,7 @@ import { Avatar } from "./BlogCard"
 export const BlogPost =({blog}:{blog:BlogStructure})=>{
 
   return <div>
-   <Appbar name={localStorage.getItem("name") || "Anonymous"}  />
+   <Appbar name={localStorage.getItem("name") || "Anonymous"} onToggleBlogs={() => {}} />
 
       <div className="flex justify-center">
         <div className="grid grid-cols-12 px-10 pt-10 w-full max-w-screen-xl" >
