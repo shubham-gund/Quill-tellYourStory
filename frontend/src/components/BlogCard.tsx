@@ -92,10 +92,10 @@ export const BlogCard = ({
 
 export function Avatar({ name, size = "small" }: { name: string; size?: "small" | "big" }) {
   return (
-    <div className={`inline-flex items-center justify-center ${size === "small" ? "w-6 h-6" : "w-10 h-10"} overflow-hidden bg-gray-700 rounded-full dark:bg-gray-600`}>
-      <span className= {`${size === "small" ? "text-sm" : "text-lg"}  font-medium dark:text-gray-300`}>
-        {name[0].toUpperCase()}
-      </span>
+    <div className={`flex items-center justify-center ${size === "small" ? "w-6 h-6" : "sm:w-9 sm:h-9 w-8 h-8"} overflow-hidden bg-gray-700 rounded-full dark:bg-gray-600`}>
+        <span className= {`${size === "small" ? "text-sm font-semibold" : "sm:text-2xl text-xl "}  dark:text-gray-300`}>
+          {name[0].toUpperCase()}
+        </span>
     </div>
   );
 }

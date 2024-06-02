@@ -52,7 +52,7 @@ export const Appbar = ({ name, onToggleBlogs }: AppbarProps) => {
     <div className="flex justify-between items-center py-4 px-4 sm:px-10 bg-slate-950 border-b-2 border-slate-800 text-white fixed w-full top-0">
       <div className=''>
         <Link to={"/blogs"} className='flex' onClick={() => handleToggle(true)}>
-          <h1 className="pb-1 text-xl sm:text-3xl font-bold cursor-pointer">Quill</h1>
+          <h1 className="sm:pb-1 text-xl sm:text-3xl font-bold cursor-pointer">Quill</h1>
           <div className='flex items-center pl-2 text-xl sm:text-2xl'>
             <MdCreate className='text-blue-400'/>
           </div>
@@ -66,7 +66,7 @@ export const Appbar = ({ name, onToggleBlogs }: AppbarProps) => {
         handleSearch={handleSearch}
       />
       <div className="flex items-center space-x-4 relative ml-8">
-        <div className="relative">
+        <div className="">
           <div onClick={() => setDropdownOpen(!dropdownOpen)} className="cursor-pointer">
             <Avatar size={"big"} name={name} />
           </div>

@@ -5,7 +5,7 @@ const SearchBar=({value ,onChange,handleSearch }:{value:string,onChange:ChangeEv
 handleSearch:()=>void
 })=>{
     return (
-        <div className="w-36 h-9 sm:w-80 sm:h-10 flex items-center px-4 bg-slate-800 rounded-full">
+        <div className="w-36 h-8 sm:w-80 sm:h-10 flex items-center px-4 bg-slate-800 rounded-full">
             <input 
                 type="text"
                 placeholder="Search"
