@@ -11,17 +11,31 @@ export const Auth = ({type}:{type:"signup" | "signin"})=>{
     email:"",
     password:""
   })
+  const [error,setError] = useState("");
 
-  async function sendRequest(){
+  async function sendRequest (e:any){
+
+    e.preventDefault();
+        if (!postInputs.email) {
+            setError("Please enter a valid email address.");
+            return;
+        }
+        if (!postInputs.password) {
+            setError("Please enter valid password");
+            return
+        }
+        setError("");
     try {
       const response = await axios.post(`${BACKEND_URL}/api/v1/user/${type === "signup" ? "signup" : "signin"}`,postInputs);
-      console.log(response.data)
+      if(!response){
+        setError("Invalid Crednetials..")
+      }
       const jwt = response.data.jwt;
       localStorage.setItem("token",jwt);
       localStorage.setItem("name",response.data.name)
       navigate("/blogs");
     } catch (error) {
-      alert("Request failed")
+        setError("Invalid Crednetials..")
     }
   }
   return <div className="h-screen flex justify-center items-center bg-slate-200 text-black">
@@ -48,12 +62,14 @@ export const Auth = ({type}:{type:"signup" | "signin"})=>{
           email:e.target.value
         })
       }}/>
-      <LabelledInput label="Password" type={"password"} placeholder="password " onChange={(e)=>{
+      <LabelledInput label="Password" type={"password"} placeholder="min 6 character " onChange={(e)=>{
         setPostInputs({
           ...postInputs,
           password:e.target.value
         })
       }}/>
+
+    {error && <p className='text-red-500 text-xs pt-1'>{error}</p>}
       <button onClick={sendRequest} type="button" className="w-full text-white bg-slate-800 hover:bg-black focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-base px-5 py-2 mt-10 mb-2 ">{type === "signin" ? "Login": "Sign-Up"}</button>
     </div>
 
