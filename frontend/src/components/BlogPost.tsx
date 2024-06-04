@@ -5,7 +5,7 @@ import { Avatar } from "./BlogCard";
 export const BlogPost = ({ blog }: { blog: BlogStructure }) => {
   return (
     <div>
-      <Appbar name={localStorage.getItem("name") || "Anonymous"} onToggleBlogs={() => {}} />
+      <Appbar name={localStorage.getItem("name") || "Anonymous"}  />
 
       <div className="flex flex-col sm:flex-row justify-center">
         <div className="w-full sm:w-3/4 px-8 sm:pl-32 sm:px-1 sm:pt-8 pt-2 pb-4 sm:pb-0">
