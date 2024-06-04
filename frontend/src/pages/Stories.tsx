@@ -1,14 +1,12 @@
 import { Appbar } from "../components/Appbar";
 import { BlogCard } from "../components/BlogCard";
-import { useBlogs } from "../hooks";
 import { BlogSkeleton } from "../components/BlogSkeleton";
+import { usePersonalBlogs } from "../hooks"
 
-export const Blogs = () => {
-  const { blogs, loading } = useBlogs();
-  // const { personalBlogs, personalBlogloading } = usePersonalBlogs();
+export const Stories = ()=>{
+  const {personalBlogs,personalBlogloading} = usePersonalBlogs();
 
-
-  if (loading ) {
+  if (personalBlogloading ) {
     return (
       <div>
         <Appbar name={localStorage.getItem("name") || "Anonymous"} />
@@ -30,7 +28,7 @@ export const Blogs = () => {
 
       <div className="pt-20 flex justify-center">
           <div>
-            {blogs.map((blog) => (
+            {personalBlogs.map((blog) => (
               <BlogCard
                 key={blog.id}
                 id={blog.id}
@@ -38,11 +36,11 @@ export const Blogs = () => {
                 title={blog.title}
                 content={blog.content}
                 createdOn={blog.createdOn}
-                isPersonal={false} // Indicate this is not a personal blog
+                isPersonal={true} // Indicate this is not a personal blog
               />
             ))}
           </div>
       </div>
     </div>
   );
-};
+}
