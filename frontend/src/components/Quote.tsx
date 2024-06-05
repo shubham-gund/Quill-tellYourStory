@@ -1,5 +1,5 @@
 export const Quote = ()=>{
-  return <div className="bg-slate-400 text-black h-screen flex justify-center items-center">
+  return <div className="bg-slate-400 text-black h-full flex justify-center items-center">
     <div>
       <div className="max-w-lg text-3xl font-bold">
         `Blogging is to Writing what  extreme sports are to athletics... more Free Form, more accident-prone, less formal, more alive. it is in many ways, Writing aloud!`
@@ -11,7 +11,5 @@ export const Quote = ()=>{
       British-American author and editor
       </div>
     </div>
-    
-    
   </div>
 }

@@ -8,6 +8,7 @@ import { Blog } from './pages/Blog'
 import { RecoilRoot } from 'recoil'
 import { Publish } from './pages/Publish'
 import { Stories } from './pages/Stories'
+import { Landing } from './pages/Landing'
 function App() {
 
   return (
@@ -15,6 +16,7 @@ function App() {
      <RecoilRoot>
      <Router>
         <Routes>
+            <Route path='/' element={<Landing/>} />
             <Route path='/signup' element={<Signup/>} />
             <Route path='/signin' element={<Signin/>} />
             <Route path='/publish' element={<Publish/>} />
