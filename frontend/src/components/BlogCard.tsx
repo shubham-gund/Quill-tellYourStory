@@ -62,8 +62,7 @@ export const BlogCard = ({
             </div>
           </div>
           <div className="text-xl font-bold pt-3">{title}</div>
-          <div className="font-medium text-slate-500 pt-1">
-            {content.length > 150 ? content.slice(0, 150) + "..." : content}
+          <div className="font-medium text-slate-500 pt-1" dangerouslySetInnerHTML={{ __html: content.length > 150 ? content.slice(0, 150) + "..." : content }}>
           </div>
 
         </Link>
