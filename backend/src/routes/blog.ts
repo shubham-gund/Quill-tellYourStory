@@ -35,6 +35,46 @@ blogRouter.use('/*', async (c, next) => {
   }
 });
 
+blogRouter.put("/profile",async(c)=>{
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env.DATABASE_URL,
+  }).$extends(withAccelerate());
+  const userId = c.get('userId');
+  const { displayName, currentPassword, newPassword }: { displayName?: string, currentPassword?: string, newPassword?: string } = await c.req.json();
+
+  try {
+      const user = await prisma.user.findUnique({
+          where: { id: userId },
+      });
+
+      if (!user) {
+          c.status(404);
+          return c.json({ error: 'User not found' });
+      }
+
+      if (currentPassword && currentPassword !== user.password) {
+          c.status(403);
+          return c.json({ error: 'Current password is incorrect' });
+      }
+
+      const updatedData = {
+          name: displayName || user.name,
+          password: newPassword || user.password,
+      };
+
+      await prisma.user.update({
+          where: { id: userId },
+          data: updatedData,
+      });
+
+      return c.json({ message: 'Profile updated successfully' });
+  } catch (e) {
+      console.error('Profile Update Error:', e);
+      c.status(500);
+      return c.json({ error: 'Error updating profile' });
+  }
+})
+
 // Post blog
 blogRouter.post("/", async (c) => {
   try {

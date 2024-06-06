@@ -2,8 +2,10 @@ import { useState } from 'react';
 import axios from 'axios';
 import { BACKEND_URL } from '../config';
 import { Appbar } from '../components/Appbar';
+import { useNavigate } from 'react-router-dom';
 
 export const ProfileEdit = () => {
+    const navigate = useNavigate();
     const [displayName, setDisplayName] = useState("");
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
@@ -17,7 +19,7 @@ export const ProfileEdit = () => {
         }
 
         try {
-            const response = await axios.put(`${BACKEND_URL}/api/v1/user/profile`, {
+            const response = await axios.put(`${BACKEND_URL}/api/v1/blog/profile`, {
                 displayName,
                 currentPassword,
                 newPassword
@@ -26,9 +28,11 @@ export const ProfileEdit = () => {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             });
-
-            setMessage("Profile updated successfully.");
-        } catch (error) {
+            if(response){
+                setMessage("Profile updated successfully.");
+                navigate('/blogs');
+            }
+        } catch (error) {   
             setMessage("Error updating profile. Please try again.");
         }
     };
