@@ -30,6 +30,9 @@ export const ProfileEdit = () => {
             });
             if(response){
                 setMessage("Profile updated successfully.");
+                if(displayName!=localStorage.getItem("name")){
+                    localStorage.setItem("name",displayName);
+                }
                 navigate('/blogs');
             }
         } catch (error) {   
