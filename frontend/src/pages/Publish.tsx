@@ -31,11 +31,11 @@ export const Publish = () => {
 
                     <h2 className="text-xl font-semibold pb-2 pl-2 ">Content</h2>
                     <JoditEditor
-                        className="text-black rounded-md mb-6"
+                        className="text-blue rounded-md mb-6"
                         ref={editor}
                         value={description}
                         config={config}
-                        onChange={(newContent) => setDescription(newContent)}
+                        onBlur={(description) => setDescription(description)}
                     />
 
                     <div className="flex justify-center mt-10 ">

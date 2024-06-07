@@ -21,6 +21,11 @@ body {
   border-radius: 6px; /* Roundness of the handle */
 }
 
+.jodit-wysiwyg {
+  background-color: rgb(25, 29, 34); /* Set the default text color to black */
+}
+
+
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555; /* Dark grey */
