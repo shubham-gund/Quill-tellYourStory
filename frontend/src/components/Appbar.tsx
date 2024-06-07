@@ -38,7 +38,7 @@ export const Appbar = ({ name } :{name:string}) => {
 
   const handleLogout = () => {
     localStorage.clear()
-    navigate("/signin"); // Redirect to login page after logout
+    navigate("/"); // Redirect to login page after logout
   };
 
   return (
