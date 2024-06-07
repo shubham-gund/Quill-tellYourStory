@@ -20,7 +20,8 @@ function App() {
             <Route path='/' element={<Landing/>} />
             <Route path='/signup' element={<Signup/>} />
             <Route path='/signin' element={<Signin/>} />
-            <Route path='/publish' element={<Publish/>} />
+            <Route path='/publish/:id' element={<Publish/> }/>
+            <Route path='/publish' element={<Publish/> }/>
             <Route path='/stories' element={<Stories/>} />
             <Route path='/blog/:id' element={<Blog/>} />
             <Route path='/blogs' element={<Blogs/>} />
