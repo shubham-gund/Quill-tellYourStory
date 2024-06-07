@@ -24,6 +24,10 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
       setError("Please enter a valid password.");
       return;
     }
+    if(postInputs.password.length < 6 ){
+      setError("Password should be of At least 6 character")
+      return
+    }
     setError("");
     try {
       const response = await axios.post(
@@ -49,7 +53,7 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
         <div className="sm:text-4xl text-2xl text-center font-extrabold pb-2">
           {type === "signin" ? "Login to Account" : "Create an Account"}
         </div>
-        <div className="text-slate-500 mb-6 px-10 text-center">
+        <div className="text-sm text-slate-500 mb-6 px-10 text-center">
           {type === "signin" ? "Don't have an Account?" : "Already have an Account?"}
           <Link to={type === "signin" ? "/signup" : "/signin"} className="px-2 font-semibold underline">
             {type === "signup" ? "Login" : "Sign-Up"}
