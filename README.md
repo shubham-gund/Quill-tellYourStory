@@ -47,7 +47,8 @@ Join Quill today and become part of a vibrant community where stories come to li
     ```
 
 3. **Set up the environment variables**
-   In wrangler.toml : 
+
+    In wrangler.toml : 
     DATABASE_URL=your_prisma_accelerate-url
     JWT_SECRET=your_jwt_secret
 
