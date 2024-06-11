@@ -48,13 +48,15 @@ Join Quill today and become part of a vibrant community where stories come to li
 
 3. **Set up the environment variables**
 
+    Create a .env file to store your postgres url
+   
     In wrangler.toml : 
-    DATABASE_URL=your_prisma_accelerate-url
-    JWT_SECRET=your_jwt_secret
 
-    create a .env file to store your postgres url 
+       DATABASE_URL=your_prisma_accelerate-url
 
-5. **Run the development server**
+       JWT_SECRET=your_jwt_secret
+
+4. **Run the development server**
     ```bash
     npm run dev
     ```
