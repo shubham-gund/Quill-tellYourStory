@@ -65,6 +65,3 @@ Join Quill today and become part of a vibrant community where stories come to li
 
 Contributions are welcome! Please fork the repository and create a pull request with your changes. Ensure that your code follows the existing coding standards and includes appropriate tests.
 
-### License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
